@@ -1,40 +1,69 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io/ioutil"
+	"launchpad.net/gobson/bson"
+	"launchpad.net/mgo"
+	"os"
 	"strings"
 	)
 
+const (
+	mongoHost = "localhost"
+	mongoDB = "nbc"
+	mongoCollection = "data"
+	)
+
+var train *bool = flag.Bool("train", true, "training mode")
+var trainingClass *string = flag.String("class", "", "The class associated with this training set")
+var trainingFilename *string = flag.String("filename", "./nbc.go", "the filename to read from in training mode")
+var forget = flag.Bool("nuke", false, "forget the learned data")
+
+
+
 func main() {
+	flag.Parse()
 
-	data, err := ioutil.ReadFile("nbc.go")
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Printf("data: \n%s\n",data)
+    session, err := mgo.Mongo(mongoHost)
+    if err != nil {
+            panic(err)
+    }
+    defer session.Close()
 
-	d1 := tokenize(string(data))
-	for i := 0; i < len(d1); i++ {
-		fmt.Printf("thing: %s\n", strings.TrimSpace(d1[i]))
-	}
+    if *forget {
+    	fmt.Printf("Forgetting learned data in %s.%s\n",mongoDB,mongoCollection)
+    	c := session.DB(mongoDB).C(mongoCollection)
+    	c.RemoveAll(bson.M{"name": 1})
+    }
 
+	if *train {
+		data, err := readFile(*trainingFilename)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		// universe := make(
+		d1 := tokenize(string(data))
+		_ = GenerateNGrams(d1, 3)
 
-	d2, err := parseRootDir("./")
-
-	for i := 0; i < len(d2); i++ {
-		fmt.Printf("%s\n", d2[i])
-	}
-
+	}	
 }
 
+func readFile(str string) (string, os.Error) {
+	data, err := ioutil.ReadFile(str)
+	if err != nil {
+		return "", err
+	}
+	return string(data), nil
+}
 
 func tokenize(str string) []string {
-	fmt.Printf("In Tokenize: %s\n", str)
 	return strings.Fields(str)
 }
 
-func parseRootDir(root string) ([]string, error) {
+func parseRootDir(root string) ([]string, os.Error) {
 	fi, err := ioutil.ReadDir(root)
 	if err != nil {
 		return nil, err
@@ -43,8 +72,17 @@ func parseRootDir(root string) ([]string, error) {
 	var ret = make([]string, len(fi))
 
 	for i := 0; i < len(fi); i++ {
-		ret[i] = fi[i].Name()
+		ret[i] = fi[i].Name
 	}
 
 	return ret, nil
 }
+
+
+
+
+
+
+
+
+
