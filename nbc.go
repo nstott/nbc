@@ -4,17 +4,9 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
-	"launchpad.net/gobson/bson"
-	"launchpad.net/mgo"
 	"os"
 	"strings"
-	)
-
-const (
-	mongoHost = "localhost"
-	mongoDB = "nbc"
-	mongoCollection = "data"
-	)
+)
 
 var train *bool = flag.Bool("train", true, "training mode")
 var trainingClass *string = flag.String("class", "", "The class associated with this training set")
@@ -26,16 +18,12 @@ var forget = flag.Bool("nuke", false, "forget the learned data")
 func main() {
 	flag.Parse()
 
-    session, err := mgo.Mongo(mongoHost)
-    if err != nil {
-            panic(err)
-    }
-    defer session.Close()
+	mongoConnect()
+    defer mongoDisconnect()
 
     if *forget {
     	fmt.Printf("Forgetting learned data in %s.%s\n",mongoDB,mongoCollection)
-    	c := session.DB(mongoDB).C(mongoCollection)
-    	c.RemoveAll(bson.M{"name": 1})
+    	forgetData()
     }
 
 	if *train {

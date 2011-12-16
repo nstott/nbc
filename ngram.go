@@ -11,17 +11,16 @@ type NGram struct {
 	hash []byte
 }
 
-func hashFn(in []string) []byte {
+func genhash(in []string) []byte {
 	md5 := md5.New()
 	md5.Write([]byte(fmt.Sprintf("%x", in)))
 	return md5.Sum()
-	
 }
 
 func GenerateNGrams(in []string, n int) []NGram {
 	out := make([]NGram, 0)
 	for i := 0; i <= len(in) - n; i += 1 {
-		out = append(out, NGram{n, in[i:i+n], hashFn(in[i:i+n])})
+		out = append(out, NGram{n, in[i:i+n], genhash(in[i:i+n])})
 	}
 
 	for i := 0; i < len(out); i++ {
