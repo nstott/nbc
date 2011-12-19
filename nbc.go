@@ -9,7 +9,7 @@ import (
 )
 
 var train *bool = flag.Bool("train", true, "training mode")
-var trainingClass *string = flag.String("class", "", "The class associated with this training set")
+var trainingClass *string = flag.String("class", "true", "The class associated with this training set")
 var trainingFilename *string = flag.String("filename", "./nbc.go", "the filename to read from in training mode")
 var forget = flag.Bool("nuke", false, "forget the learned data")
 
@@ -34,8 +34,10 @@ func main() {
 		}
 		// universe := make(
 		d1 := tokenize(string(data))
-		_ = GenerateNGrams(d1, 3)
-
+		ngrams := AggregateNGrams(GenerateNGrams(d1, 3, *trainingClass), *trainingClass)
+		for _, v := range ngrams {
+			fmt.Printf("%d -> %s\n", v.count[*trainingClass], v.hash )
+		}
 	}	
 }
 

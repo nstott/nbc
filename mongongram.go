@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"launchpad.net/gobson/bson"
 	"launchpad.net/mgo"
 	"os"
@@ -14,12 +13,6 @@ const (
 )
 
 var session *mgo.Session
-
-type MongoNGram struct {
-	count map[string]int // class : key, count : int
-	probability map[string]float64 // class : key, prob: float
-	hash string
-}
 
 func mongoConnect() *mgo.Session {
 	var err os.Error
@@ -56,7 +49,33 @@ func forgetData() {
 	c.RemoveAll(bson.M{"name": 1})
 }
 
-// func addNgram(ngram NGram, class string) {
-// 	item := &MongoNGram{1, 0, ngram.genhash}
-// 	fmt.Println(item)	
-// }
+
+func exists(ngram nGram) bool {
+	collection := getCollection()
+
+	if ngram.hash == "" {
+		panic("NGram has unitialized Hash") 
+	} 
+
+	c, err := collection.Find(bson.M{"hash": ngram.hash}).Count()
+	if err != nil || c == 0 {
+		return false
+	}
+	return true
+}
+
+func addNgram(ngram nGram, class string) {
+	if exists(ngram) {
+		// the hash already exists, update the counts
+	} else {
+		// insert this ngram into the ddb
+	}
+	// fmt.Printf("does ngram (%v) exist? %v\n", ngram.tokens, exists(ngram));
+}
+
+func dumpNGramsToMongo(ngrams map[string]nGram) {
+	for _, v := range ngrams {
+		
+	}
+}
+
