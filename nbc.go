@@ -36,8 +36,10 @@ func main() {
 		d1 := tokenize(string(data))
 		ngrams := AggregateNGrams(GenerateNGrams(d1, 3, *trainingClass), *trainingClass)
 		for _, v := range ngrams {
-			fmt.Printf("%d -> %s\n", v.count[*trainingClass], v.hash )
+			fmt.Printf("%d -> %s\n", v.Count[*trainingClass], v.Hash )
 		}
+		dumpNGramsToMongo(ngrams, *trainingClass)
+		updateClass(*trainingClass, 1)
 	}	
 }
 
