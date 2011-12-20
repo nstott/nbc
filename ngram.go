@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"launchpad.net/gobson/bson"
+	"launchpad.net/mgo"
 	)
 
 /* an ngram */
@@ -92,3 +93,48 @@ func dumpNGramsToMongo(ngrams map[string]nGram, class string) {
 	}
 }
 
+
+func countNGrams(class string) {
+// > map
+// function () {
+//     emit("total", this.count.yo);
+//     emit("number", 1);
+// }
+// > r
+// function (key, values) {
+//     print(key + "\n");
+//     if (key == "number") {
+//         print(values);
+//         return values.length;
+//     } else {
+//         var t = 0;
+//         values.forEach(function (i) {t += i;});
+//         return t;
+//     }
+// }
+
+	collection := getCollection()
+	var field = "count." + class
+	job := mgo.MapReduce{
+        Map:      "function() { emit(\"total\", this.count."+class+")}",
+        Reduce:   "function(key, values) { if (key == \"number\") {return values.length} else {var t = 0; values.forEach(function (i) {t += i});return t;} }",
+	}
+	var result []struct { Id string "_id"; Value int }
+	q := collection.Find(bson.M{field: bson.M{"$gt": 0}})
+	_, err := q.MapReduce(job, &result)
+	if err != nil {
+	    panic(err)
+	}
+	for _, item := range result {
+	    fmt.Printf("%s %d\n",item.Id, item.Value)
+	}
+}
+
+
+
+// func getClassNGramCount(class string) int {
+// 	job := mgo.MapReduce{
+// 		Map:      "function() { emit(this.n, 1) }",
+// 		Reduce:   "function(key, values) { return Array.sum(values) }",
+// 	}	
+// }

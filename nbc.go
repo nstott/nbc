@@ -40,7 +40,14 @@ func main() {
 		}
 		dumpNGramsToMongo(ngrams, *trainingClass)
 		updateClass(*trainingClass, 1)
-	}	
+		counts, total := getClassTotals()
+		probabilities := classProbabilities(counts, total)
+		fmt.Printf("%v\n",probabilities)
+		countNGrams(*trainingClass)
+
+	} else {
+		
+	}
 }
 
 func readFile(str string) (string, os.Error) {
@@ -70,8 +77,18 @@ func parseRootDir(root string) ([]string, os.Error) {
 	return ret, nil
 }
 
+func laplaceSmoothing(n int, N int, k float64, classCount int) float64 {
+	return ( float64(n) + k ) / ( float64(N) + float64(classCount) )
+}
 
-
+func classProbabilities(counts map[string]int, total int) map[string]float64 {
+	var classCount = len(counts)
+	probabilities := make(map[string]float64)
+	for k, v := range counts {
+		probabilities[k] = laplaceSmoothing(v, total, 1, classCount)
+	} 
+	return probabilities
+}
 
 
 

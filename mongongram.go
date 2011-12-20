@@ -18,8 +18,9 @@ func mongoConnect() *mgo.Session {
 	var err os.Error
 	session, err = mgo.Mongo(mongoHost)
     if err != nil {
-            panic(err)
+        panic(err)
     }
+    session.SetSafe(&mgo.Safe{})
     indexCollection()
     return session
 }
