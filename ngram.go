@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"launchpad.net/gobson/bson"
 	"launchpad.net/mgo"
+	"math"
+	"strings"
 	)
 
 /* an ngram */
@@ -19,11 +21,7 @@ func NewNGram(n int, tokens []string, class string) nGram  {
 }
 
 func genhash(in []string) string {
-	var ret string
-	for _, v := range in {
-		ret += " " + v
-	}
-	return ret
+	return strings.Join(in, " ")
 }
 
 func GenerateNGrams(in []string, n int, class string) []nGram {
@@ -67,14 +65,6 @@ func exists(ngram nGram) bool {
 	return true
 }
 
-func addNgram(ngram nGram, class string) {
-	if exists(ngram) {
-		// the hash already exists, update the counts
-	} else {
-		// insert this ngram into the ddb
-	}
-	// fmt.Printf("does ngram (%v) exist? %v\n", ngram.tokens, exists(ngram));
-}
 
 func dumpNGramsToMongo(ngrams map[string]nGram, class string) {
 	collection := getCollection()		
@@ -94,47 +84,49 @@ func dumpNGramsToMongo(ngrams map[string]nGram, class string) {
 }
 
 
-func countNGrams(class string) {
-// > map
-// function () {
-//     emit("total", this.count.yo);
-//     emit("number", 1);
-// }
-// > r
-// function (key, values) {
-//     print(key + "\n");
-//     if (key == "number") {
-//         print(values);
-//         return values.length;
-//     } else {
-//         var t = 0;
-//         values.forEach(function (i) {t += i;});
-//         return t;
-//     }
-// }
+func getTotalNGrams(class string) int {
 
 	collection := getCollection()
 	var field = "count." + class
 	job := mgo.MapReduce{
         Map:      "function() { emit(\"total\", this.count."+class+")}",
-        Reduce:   "function(key, values) { if (key == \"number\") {return values.length} else {var t = 0; values.forEach(function (i) {t += i});return t;} }",
+        Reduce:   "function(key, values) { var t = 0; values.forEach(function (i) {t += i});return t; }",
 	}
 	var result []struct { Id string "_id"; Value int }
 	q := collection.Find(bson.M{field: bson.M{"$gt": 0}})
 	_, err := q.MapReduce(job, &result)
-	if err != nil {
+	if err != nil  {
 	    panic(err)
 	}
-	for _, item := range result {
-	    fmt.Printf("%s %d\n",item.Id, item.Value)
+	if len(result) > 0 {
+		return result[0].Value
 	}
+	return 0;
 }
 
+func getClassCount() int {
+	collection := getCollection()
+	count, err := collection.Find(bson.M{}).Count()
+	if err != nil {
+		panic(err)
+	}
+	return count
+}
 
+func getInstanceCount(hash, class string) int {
+	collection := getCollection()
+	var ngram nGram
+	err := collection.Find(bson.M{"hash": hash}).One(&ngram)
+	if err != nil {
+		return 0
+	}
+	return ngram.Count[class]
+}
 
-// func getClassNGramCount(class string) int {
-// 	job := mgo.MapReduce{
-// 		Map:      "function() { emit(this.n, 1) }",
-// 		Reduce:   "function(key, values) { return Array.sum(values) }",
-// 	}	
-// }
+func totalProbability(probabilities []float64, classProbability float64) float64 {
+	ret := classProbability
+	for _, v := range probabilities {
+		ret += math.Log(v)
+	}	
+	return ret
+}

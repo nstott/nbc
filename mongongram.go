@@ -30,7 +30,11 @@ func mongoDisconnect() {
 }
 
 func getCollection() mgo.Collection {
-	return session.DB(mongoDB).C(mongoCollection)	
+	return session.DB(mongoDB).C(*collection)	
+}
+
+func getClassCollection() mgo.Collection {
+	return session.DB(mongoDB).C(*collection + "_classes")
 }
 
 func indexCollection() {
@@ -47,5 +51,8 @@ func indexCollection() {
 
 func forgetData() {
 	c := getCollection()
-	c.RemoveAll(bson.M{"name": 1})
+	c.RemoveAll(bson.M{})
+
+	c = getClassCollection()
+	c.RemoveAll(bson.M{})
 }
