@@ -1,0 +1,175 @@
+Viral coefficients + store feature + branding + influencers = cool apps on iOS first
+DECEMBER 12, 2011 BY ROBERT SCOBLE 51 COMMENTS
+
+At LeWeb last week former Google CEO, Eric Schmidt was asked by an audience member why the coolest apps come out on iOS first. Apps like Flipboard and Instagram. He answered:
+“”So my prediction is that 6 months from now, I think the question
+is exactly right right now, and 6 months from now, you’ll say the
+opposite. Because ultimately applications vendors are driven by
+volume, and the volume is favored by the open approach that Google is
+taking. That there are literally so many manufacturers who are working
+so hard to distribute Android phones globally, that whether you
+like ICS or not, and again I like it a great deal, you will want to
+develop for that platform, and perhaps even first. So think of it as a transition over the next 6 months.”"
+Thing is, that doesn’t measure up with what lots of app developers tell me, and it doesn’t measure up with what you can see in the street.
+Right after that an entrepreneur walked up to me with his app, which looked like Instagram. He wondered why the press doesn’t cover apps not designed on iOS. I said “come with me.”
+We walked around the street at LeWeb. First person I ran into was Ayelet Noff. She is one of Israel’s top community connector types. Runs a blog called “Blonde 2.0.” But that doesn’t really explain her role in the tech scene.
+“What kind of phone do you use?” “iPhone.”
+Next up? Cathy Brooks, who does the same thing in SF? “iPhone.”
+This continued with person after person until we got about 10 people. I think we saw one Android phone, nine iPhones, and no WP7′s. This was a crowd of European entrepreneurs and tech passionates.
+“Had enough yet?” I asked the entrepreneur.
+This matches what I have seen at conference after conference. Last year I spoke at the Where 2.0 conference. This is a conference with tons of hackers and mobile passionate developers and leaders. 80% of the audience used an iPhone.
+Last week I had dinner with Loic LeMeur, who runs LeWeb. I watched him closely at dinner. He only used his iPhone. But when I started talking to him about mobile he quickly pulled out an Android and a Windows Phone 7 device. But it was obvious to me that his favorite device was iPhone. Do you think we talked about apps that only existed on WP7 or on Android? No way.
+Other things I’ve noticed. Folks who study the app market, like Distimo, say that Android users won’t buy apps.
+That gets discussed behind closed doors in Silicon Valley VC funds. Note that famous VC Kleiner Perkins Caufield Byers has an iFund (they fund lots of famous iOS apps, including Flipboard, etc). When I asked Matt Murphy whether he was going to have an aFund or a WP7Fund he quickly answered “no.”
+When I talked with Path CEO Dave Morin a week ago:
+
+He told me how hard it is to build beautiful apps on Android. Tonight I asked him what the numbers were like?
+“80% iOS, 20% Android,” he texted me.
+Now, to be fair, not every developer sees these kinds of results. Bobby Ghoshal, CEO of Flud, says he saw more Android users than iOS users. The problem with his results is that he had a very strong competitor on iOS (App of the Year in 2010 on iPad, Flipboard) while his app had nearly no competiton on Android. Let’s see what happens to Flud when Flipboard moves over.
+One major reason, by the way, that Flipboard continues to be Apple’s darling is that it hasn’t yet done an app for another platform. Developers tell me that Apple is much more likely to reward you with a “featured” spot if you stay iOS only. Path is one of the most public examples of a company breaking Apple’s unspoken rules and getting away with it (so far).
+When I recently interviewed Mike McCue, CEO of Flipboard, where he showed me his new iPhone app, I tried to nail him down about Android. He deftly didn’t answer the question:
+
+What does that mean? Well, last week I was in the car with 955 Dreams CEO Kiran Bellubbi shortly after he learned that Apple had named his app, Band of the Day, as runner up for iPhone app of the year. He told me his servers were near melting down with thousands of downloads per hour.
+Which gets me to the final point. Here’s why Eric Schmidt is wrong and will continue to be wrong: virality coefficient.
+What is that? Well, it’s the ability to tap into an early user base and get that user base to tell other people about it.
+
+Meet Paul Davison. That’s him on the left. He has an app that’s still in stealth. I accidentally learned about it at a geek party today in San Francisco. I watched him work the room and get everyone in the room on his app. Nearly every person in that room was an iPhone user.
+He has not yet gotten funding. His app will be the hottest thing at SXSW next year. I can’t wait to tell you about it. I took a picture so I could remember the moment I first got on this app but I was also watching how the San Francisco network works.
+I wasn’t the only one watching the reactions and laughs that Paul was getting. Users, even though they were asked to keep it quiet, kept heading over to other parts of the party to tell their friends that they had to see Paul’s app. All had iPhones. I think I saw only two Android phones at that party and no Windows Phone 7 devices.
+Watching this was me and a group of VCs. They asked for the app and business cards.
+See, what do VCs look for? Virality coefficients. This is why they poured so much money into Facebook so early. The virality coefficient for that was about what Paul was getting today. In other words, one user is likely to tell four other users about this app. That’s extraordinary. Just listen to Eric Ries, author of the Lean Startup, tell me about why getting a high viral coefficient is so important to businesses.
+But it’s worse than that. Because investors want to see sizable adoption before they will fund any app, you gotta do the hard work that Paul was doing today: showing your app around and hoping that someone picks it up and starts spreading it around.
+Will that happen with Android? It can. There are more handsets out there than on iOS. But, in my experience, it’s very hard to get the kinds of virality that you need to get funded on non-iOS platforms.
+It’s also much harder to get the press, the folks who run the Apple store (they watch the press too and use it as a guide for what they should pick), and the VCs to take you seriously if you aren’t on iOS.
+I don’t see this mix changing much. In fact, as Loic told me, he has moved back to iOS because of this and other reasons. That means that Google has its work cut out for it if it wants the sexy cool apps written for it first.
+Now, when I talk with experts who help launch companies, like Mike Schroeder, who works at LaunchSquad, he says that Android is coming on strong. His clients, like Thuuz, a sports enthusiast app, are seeing about 65% Android/35% iOS and he’s pushing his clients to do Android and iOS together.
+That’s good advice.
+Now, who really is hurt by all this? Well, RIM is completely out of the game. No developers I know are building RIM apps on go-to-market entries.
+Microsoft continues to struggle. It’s very rare to see a WP7 app demoed anywhere (LeWeb shows why, the only WP7 devices I saw there were owned by Microsoft execs/employees, or by app developers who were paid for their development).
+Consumers who haven’t bought iOS devices will feel hurt, but generally only the better apps will get pulled over from iOS anyway, so are they really hurt? Well, only if they care about being on the bleeding edge. Most users don’t care so much, if they did, Android wouldn’t have the marketshare it now has.
+So, all this really means is if you are struggling to get adoption, you have to care and if you like arguing OS’s out, like I do, then you’ll care. The rest of it will come out in the wash.
+That said, Eric Schmidt will have to face more of these questions because Android isn’t changing the game that I can see. iOS is still king for early adopters.
+UPDATE: Brian Hall asks “Are Android users simply cheap?”
+FILED UNDER: WEB
+The Facebook Freaky Line
+NOVEMBER 20, 2011 BY ROBERT SCOBLE
+
+
+It seems everyone is getting freaked out by Facebook once again. Molly Wood at CNET says that Facebook’s automatic sharing features are ruining sharing. That got everyone to pile on over on Techmeme.
+First, what does this automatic sharing feature (otherwise known as “frictionless sharing”) do? Well, every time I play a song on Spotify, for instance, it tells everyone something like “Robert Scoble is listening to Skrillex on Spotify.” On Facebook’s web interface that shows up over on the right in the new ticker (not everyone has that, and only the web version shows it). It also puts that onto my new Timeline (only developers have that feature, so far).
+It doesn’t just do this for music, either. Everytime I read a story in the Washington Post’s new newsreader it does the same. “Robert Scoble read Ex-MySpace CEO resigns as Zynga executive on Washington Post Social Reader.” (Which I actually did, right now).
+Here’s Don Graham, Chairman of the Washington Post showing me how that app works:
+
+Soon, Facebook PR told me this week, about 60 different apps will do the same. So, whenever I take a picture of a meal, or do some other action, with Foodspotting, you’ll know it. If I ever exercise with Runkeeper, you’ll know it. And on, and on, and on.
+Now many of you think that’s very freaky. You don’t want to be an oversharing social media wanker like me. You want some parts of your life to be private. You don’t like it if Mark Zuckerberg sucks every bit of knowledge out of your cell phone and shoves it onto your Timeline for everyone of your friends to see (remember, only egocentric social media wankers like me make all their detail public, right?).
+Why would ANYONE agree to this? Well, some, like Dave Winer, haven’t. He deleted his Facebook account recently.
+Others, like me, are “all in” and very intrigued with this new world. We’ve crossed the freaky line never to return to a world where apps don’t share with Facebook.
+What’s really interesting to me is that my wife has crossed the freaky line. She loves the new Spotify and thinks it’s cool her friends get to see her music. That shocked me, because she usually is pretty conservative when it comes to being public. Even better I’ve had dozens of conversations with people and from teenagers to old farts, like me, there’s an astute level of understanding of where the freaky line is for them. If an app crosses the freaky line in a way they don’t like, they turn it off or learn how to use it so it doesn’t spray everything onto Facebook (Spotify, for instance, lets you do just that in the settings).
+What the heck is Mark Zuckerberg doing?
+He’s building a new media company. One where the media comes TO US. Compare to boring old Yahoo. There we have to visit the media by going to http://sports.yahoo.com/ or http://finance.yahoo.com/
+See, the new world is you just open up Facebook and everything you care about will be streaming down the screen.
+This is what Zuckerberg doesn’t want to explain to you: to be your new media assistant he needs to know everything about you. Think about it. When i clicked “like” on the San Francisco 49ers Facebook Page, all of a sudden I started seeing news items about the 49ers.
+The more Zuckerberg knows about you, the more media he will be able to bring you.
+This is why I say Facebook’s real strategy is to know everything about everything. Of course they won’t get there. Why? Because there’s a freaky line.
+Governments will soon step in to define the freaky line. They already have started that process and it varies from country to country. In Germany, for instance, the privacy laws are stricter than they are in the United States, so Facebook won’t be able to do some of its “studying” there.
+Users will turn off apps, or change their behavior (I already have, for instance, I don’t listen to Lady Gaga on Spotify, I only listen to bands on Spotify that I want you to see).
+Zuckerberg will have to change his behavior too. You’ll find them astutely moving the freaky line around. For instance, I really do agree with some of the criticisms about this “frictionless sharing” and I think Facebook (and the third-party developers) are going to have to give their users clear controls. Spotify simply isn’t doing enough here. Let’s explain why:
+When I click play on a song in Spotify it instantly tells all of you that I’m listening to that song. For instance, right now, on my screen, Facebook is telling me that Mark Zuckerberg is listening to Something Goes Right… by SBTRKT on Rdio. But is he really listening to it? In my case, possibly not. Why? I might be scrubbing through a list of song titles trying to find a good one. I might be sampling music for 15 seconds a song. I might have just accidentally left Spotify on play. You don’t really know if I’ve listened to that song, or if I really like it.
+I listen to Spotify a lot in the car. I’m not even in a good place to tell you anything about the music I’m listening to. I wish I had 30 seconds to hit next before you were told I was listening to it.
+Same thing with the Washington Post. Just because I clicked on a link it goes out to all of you. Very viral, and very good for software developers but it will quickly devolve into noise. Facebook always does this with its platforms (starts noisy, then moves the freaky line back as users get pissed off at the noise showing up on their screens).
+This is Zuckerberg’s brilliance. Other companies just aren’t willing to even try to move the freaky line forward in order to build a new media company.
+On the other hand, I find this new “world’s biggest smallest village behavior” to be interesting. I’m listening to the same music that Mark Zuckerberg is right now. And everyone who is watching me on Facebook can do the same. THAT is an interesting shift in our human behavior.
+How fast should Facebook move this freaky line? Well, they are spending months arguing with third-party developers about the verbs that will be allowed and what kind of controls they need to institute so as to not piss off too many users.
+So, why am I all in?
+Because:
+I’ve found new music over the past two months.
+I’ve found new news over the past two months.
+I’ve learned stuff about my own patterns and can go back onto the Timeline and learn more.
+How far will this go? Well, look at Zuckerberg’s own Timeline. He just got the new Jawbone Up. He posted “I can’t wait until I can sync this data directly to my timeline.”
+To many of you that is WAY OVER the freaky line. After all, the Jawbone knows when you’ve slept. When you’ve walked someplace. It might, gasp, even know when you are having sex. And Zuckerberg wants to report everything to his timeline.
+Do you get why? I do. He knows that the more Facebook knows about him the better the media will be that Facebook can deliver. Oh, yes, and of course the better the advertising will be too.
+“Oh, Scoble, how can Facebook bring you better advertising?” Well, check out Etsy’s gift recommendation page. It’s driven by Facebook. It’s magical. It recommends gifts based on my friends and family’s Facebook behaviors. In the case of my producer, Rocky Barbanica, it’s VERY accurate. Too accurate to tell you here just what he’s into. Yes, he’s into the San Francisco 49ers, too, but he’s into a few other things I didn’t know about. Now I can get him that perfect gift. All because he shared his life with Facebook. UPDATE: Etsy wrote a blog post about how they made that.
+Now, what will Facebook soon know about people because of Frictionless Sharing? A lot more than it knows today.
+The freaky line is about to move. Are you ready?
+UPDATE: this has gotten a big conversation going on Google+ here and on Facebook here.
+FILED UNDER: WEB
+Developers: two companies you should be paying attention to (Loggly and New Relic)
+NOVEMBER 8, 2011 BY ROBERT SCOBLE
+
+New Relic and Loggly. I am hearing about them more and more from leading-edge developers around the world. At the recent Y Combinator Startup School these two were praised on stage. So, I wanted to learn more about them. Indeed, these are two companies that are changing the world of software development. What do they do? New Relic lets you watch your server infrastructure and see — in real time — the effect of changes of your code on response times. Loggly lets you watch your server’s logs, again in real time, and search them so you can see new patterns and learn more about what your customers and infrastructure is doing.
+Here I sat down with both companies so you can learn a lot more about these two innovative companies.
+New Relic:
+
+Loggly:
+
+FILED UNDER: WEB
+I wish I had never heard of Google+’s brand pages
+NOVEMBER 8, 2011 BY ROBERT SCOBLE
+
+OK, you all know I’m Google+’s biggest fan, right? For the past five months I’ve poured almost all my time into my Google+ account, which has paid off with a fun community and a lot of followers.
+But yesterday Google+ rolled out brand pages. Here’s all the relevant news about that on Techmeme.
+I wish I had never heard of them.
+Why not?
+Well, when you work for a public company anything you post as a representative of that company needs to be done very carefully (I work on the media team at Rackspace, going around the world studying the bleeding edge of the technology industry). The problem is that there’s no editorial tools for anything posted to our Google+ account. Google+ brand accounts are woefully inadequate for public companies’ needs. Let’s discuss some of the limitations:
+1. Only one person can “own” or “post to” an account. There’s no way for a social media team, or a customer service team, to split up duties. Heck, and that’s assuming that only one team inside a company will want ownership of such an account. What if the marketing team wants to post to the team owned by the customer service manager?
+2. If one Gmail account was used to build the public account, and it’s shared between multiple people, there’s no way to know who is posting to that account.
+3. If there are rules against posting inside a company to a company account without getting several people’s approval (as there is within Rackspace) it makes it unbearable to post content that has any “life” in it. Why? Because there’s no process for signoffs, so now we’re stuck coming up with some new publishing system that isn’t built into the tool itself.
+4. There is no way to add Team members to this account without getting them to follow the account first.
+5. There’s no way to see who is following such an account if you are the owner. (UPDATE: some people say I can see this, but it’s hard to find).
+6. It is extremely easy to post something by accident to your company account if you are the owner. Just ask Google employee Steve Yegge about that one.
+7. If I, as owner of the Rackspace Hosting account, were to die tonight for some reason, how would ownership get transfered over to someone else at Rackspace?
+So, let me get this straight, only one person, working on one team, can post to a social networking account? So, if the brand needs to say something to customers in a high-touch, high-service business like ours (we have customer service people posting and answering phones and talking on chat 24 hours a day 365 days a year) they will need to wake me up to get me to post something? Really? Google, did you really think this through?
+Yes, Facebook didn’t have those features for its brand pages at first either but then when Facebook first came on the scene no one thought they would use it for business. Heck, when I first heard about Facebook it was still for college students only.
+Yesterday I registered Rackspace Hosting thinking “of course they have features to let me transfer the account to other people, and of course they have features to let me add other people as managers.” After all, it’s been five months since Google+ launched and I figured that Google had worked with big brands to make sure that those features were there.
+But when I was signing up for the brand page, was there any warning that “hey, you will be the only one allowed to post to this page right now.” Nope.
+It was quickly added to Google search and then it was too late to turn back.
+But now I’m realizing just what a mess I stepped into. I now have to be extremely careful about what I post to that account. I have to even be very careful about who that account follows (already I added two people and their posts are showing up on the feed, which means that whoever I add can probably mess up someone’s experiences in the future). Not to mention that I can’t see who else works at Rackspace (like I can on Facebook) and I can’t even see who is following the account, so I can easily pick from those people to follow back.
+Even commenting on this account is very scary. I still don’t know how to see whether I’m posting as “Robert Scoble” or as “Rackspace.” This is NOT simple enough and if it’s scary for me (someone who has posted thousands of times on Google+) I imagine it’s terrifying for some junior employee who is getting whipsawed by corporate policy and politics.
+Because there’s no way to work on a publishing process, now I’m talking with my coworkers about using a tool, like Trello, to build a publishing process so that there’s some way for us to figure out together what to post (we also use Salesforce Chatter). Not exactly what I wanted to be doing this week. But I started one anyway.
+Even worse, I’m up early this morning to upload a video, with the founders of New Relic (very cool new company that our customers will want to know about) and now I have to decide where to post that content. Do I post it to Rackspace’s new account, or do I post it to my own personal account? Or do I post it to both (which will look spammy to customers who follow both of us). Yet another reason why I wish I had never heard of Google+ brand accounts: I can’t post content to multiple places. Grrr.
+Did anyone really think these things through? Why did they take five months to get done?
+Anyway, this is just a way for me to tell anyone thinking of signing up their company for a Google+ brand account to think twice. You might, because you signed your company up for such a thing, get saddled with an entirely new job that you might not like one bit. One that you’ll find that Google didn’t equip you for success in.
+UPDATE: of course we’re discussing this over on Google+ too.
+FILED UNDER: WEB
+Verb wall: The $40 billion Mark Zuckerberg is leaving on the table
+NOVEMBER 3, 2011 BY ROBERT SCOBLE
+
+
+I was on stage with Facebook advertising Product Manager Paul Adams this morning. Don’t know who he is? He came up with the research that led to Google Circles before moving to Facebook. Interesting guy, but he told me that Facebook isn’t working on ways to push advertising back out through the verbs to client apps.
+First, what’s a verb? Every time you comment, like, read, run, or do other things you are creating data that gets turned into a verb and pushed into Facebook via an API.
+You can see the results of these verbs on the new ticker that runs on the right side of Facebook.com. On my screen right now it says “Erik Lammerding read…” or “Verizon Wireless added…” or “Katherine Goldstein likes…”
+But the problem is Facebook has a verb wall, which means Zuckerberg is leaving BIG money on the table.
+Let’s unpack just how much money Facebook is leaving on the table. First of all, here’s an interesting video with AllTrails. Don’t know who they are? They are yet another app developer that is collecting interesting data about the world. In this case hiking trails and other outdoor activity areas. Go ahead and watch, I’ll wait until you get back.
+
+Do you see the verbs? “Walked…” “Skiied…” “Boated…” “Finished…” “Ran…” “Cycled…” “Climbed…”
+Now, the reason I posted this here is because there are hundreds of companies like AllTrails. Companies like Foodspotting, who are studying our emotion, er, verbs around food. Companies like RunKeeper, who are studying our emotion, er, verbs around exercise. Companies like Foursquare, who are studying our emotion, er, verbs around location.
+These companies have data that Mark Zuckerberg wants. Why?
+Facebook’s driving mission is to know everything about everything. Oh, OK, they don’t say that on stage, but we all know that’s where they are going, don’t we? (officially it’s: “Facebook’s mission is to give people the power to share and make the world more open and connected.”)
+After all, Facebook is a new kind of media company. One where the media comes TO us. Yahoo is the old kind of media company. We have to go TO the media there. That’s why Yahoo is boring, no matter how many iPad apps they release. It’s old and creaky. It’s not social. It doesn’t have verbs. It doesn’t have a way to bring my friends, or my interests to me like Facebook and Google+ can. Facebook is new and fresh. Paul nailed why on stage: the web is being rebuilt around people. He gave several examples, but, heck, AllTrails is as good an example as any. I can see what people say about the trails. Even better, as AllTrails integrates into Facebook, I can see which trails my friends have been on.
+The problem is that Mark Zuckerberg’s “verbs” (the way that apps, like Foodspotting, AllTrails, Foursquare, or Runkeeper will share their info into Facebook) are sort of one way. Facebook has a cultural bug here. They view everything like a data roach motel: all your data can come in, but it won’t leave. Well, except that Zuckerberg keeps hiring all these open web folks, so watch for this to change.
+And, due to Paul’s statements on stage, I’d go further: all your app data will come in, but no value will escape.
+That means that Mark Zuckerberg still hasn’t seen the $40 billion market that he’s leaving on the table because he’s not thinking about how to become THE ad network for the modern mobile age.
+Let’s go into what Facebook will have to do.
+They will need to build a new messaging infrastructure for advertising. A lot of that is already built, but ads need to be portable, mobile friendly (form factors that work on iPhones and Android phones need to be standardized on) and need to be able to be passed through the contextual engine that Facebook is building (geeky way of saying “database that understands everything about you and your role in the world”) and out, through those verb interfaces, to be displayed on apps like Foodspotting, AllTrails, etc.
+Today, when I use Facebook on a mobile phone, I don’t see a whole lot of advertising.
+Adams, who is a product manager working on the advertising team, hinted at the kinds of advertising that he’s interested in: ones that put people first. He showed several examples of commercial sites that became much more useful once social is added to them. Etsy and Trip Advisor, for instance, both change when you add Facebook to them to show a new kind of commerce: “five of your friends have been to this hotel.” THAT is very powerful.
+But, take that out, past the verb wall, aren’t we more likely to be transactional when we are out and about and using apps like Amazon’s new “Flow” app, or AllTrails. “Five of the people who’ve been on this trail ate at Joe’s dinner, 500 yards away.”
+This is a new kind of advertising and there’s going to be BILLIONS of dollars spent on this kind of “people-centric” advertising.
+But first Mark Zuckerberg has to open up the verb wall and start passing VALUE back through that wall out to third-party developers.
+If he does that, oh, boy, you will see a TON of innovation unleashed as developers build new kinds of apps for mobile developers.
+First, though, Mark will have to blow open the verb wall. So, Zuckerberg, this is all my way of saying “tear down this wall.”
+FILED UNDER: WEB
+Beating the traffic woes: Trapster vs. Waze
+NOVEMBER 1, 2011 BY ROBERT SCOBLE
+
+I drive a lot. Since mid-2009 I’ve put 45,000 on my 2010 Prius. Almost every mile of that has been with my trusty iPhone, usually on a holder on the dashboard or in one of my drink holders.
+Lately I’ve been testing out two apps (Waze and Trapster) to help make driving more fun, and I invited execs from both companies to my house to go on a drive and learn about the philosophies behind both companies.
+Trapster started out stronger, with its “share where the cops are” approach. It quickly got to 14 million downloads, although I doubt many of them are active anymore, based on my experiences driving around San Francisco.
+Waze didn’t focus on just cops, but on the overall driving experience. You could report road closures, or obstacles in the road (I reported a ladder in the middle of the freeway once) to other drivers.
+Since Waze started in Israel, and because Google had better maps and driving directions in the United States, its growth had been slower, which meant its utility wasn’t nearly as good.
+But that was a year ago. Today Waze is blazing a new path with a very nice and newly-designed app. Every day, at least in San Francisco, I see more and more drivers using it, which means traffic reports are getting more and more accurate and more and more granular. Now it’s not uncommon for me to be right behind another Waze user, even on mountain roads. Unlike on Trapster, where you have to guess where drivers are, you can see exactly where they are on Waze (don’t worry, you can be totally anonymous, although I always am totally public so you’ll see me driving around).
+On Trapster, drivers leave “blue lines” where they’ve been (they last a couple of hours) so you can at least tell where drivers have been. Tonight we drive home at 11 p.m. from Milpitas and I was using both services. On Waze I saw lots of other drivers, but on Trapster I saw no blue lines. The crowd has moved, it seems, and that makes Waze more useful.
+Trapster does have one new feature that’s very cool. Trapster was recently sold to Navtek, the mapping folks, and they’ve mapped the speed limits on many of the region’s roads. So, as you’re driving along you’ll know the speed limit. Handy, because in many areas the speed limit signs are infrequent (it warns you if you are exceeding the limits, too, which is nice).
+If you watch the video I did with Trapster, you’ll see that the company has started moving away from just being about spotting cops and traffic cameras, and is now also about sharing traffic info, like blocked lanes, and such. But here Waze is innovating faster (Trapster really hasn’t added many new features lately, while Waze has gotten a total overhaul) and has more users, so that’s the one I find myself reaching for the most.
+What about you? Are you using any traffic apps on your phone? If so, which one?
+Here’s videos of both teams:
