@@ -5,7 +5,6 @@ import (
 	"io/ioutil"
 	"launchpad.net/gobson/bson"
 	"launchpad.net/mgo"
-	"math"
 	"strings"
 	)
 
@@ -42,6 +41,17 @@ func (n *nGram) exists() bool {
 }
 
 
+func (n *nGram) GetInstanceCount(class string) int {
+	collection := getCollection()
+	var ngram nGram
+	err := collection.Find(bson.M{"hash": n.Hash}).One(&ngram)
+	if err != nil {
+		return 0
+	}
+	return ngram.Count[class]
+}
+
+
 func getTotalNGrams(class string) int {
 
 	collection := getCollection()
@@ -71,23 +81,6 @@ func CountDistinctNGrams() int {
 	return count
 }
 
-func getInstanceCount(hash, class string) int {
-	collection := getCollection()
-	var ngram nGram
-	err := collection.Find(bson.M{"hash": hash}).One(&ngram)
-	if err != nil {
-		return 0
-	}
-	return ngram.Count[class]
-}
-
-func totalProbability(probabilities []float64, classProbability float64) float64 {
-	ret := classProbability
-	for _, v := range probabilities {
-		ret += math.Log(v)
-	}	
-	return ret
-}
 
 
 
