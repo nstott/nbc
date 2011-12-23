@@ -8,7 +8,8 @@ import (
 	"strings"
 	)
 
-/* an ngram */
+// nGram is a collection of n tokens.  Count refers to the number of times this ngram has been seen in a specific document/class.  
+// ngrams are considered unique based upon their hash 
 type nGram struct {
 	Length int
 	Tokens []string
@@ -16,16 +17,20 @@ type nGram struct {
 	Count map[string]int
 }
 
+// NewNGram returns a new ngram
 func NewNGram(n int, tokens []string, class string) nGram  {
 	return nGram{n, tokens, genhash(tokens), map[string]int{class: 1}}
 }
 
+// genhash is a hashing function that returns a unique representation of the tokens.  the hash also serves as the primary key in the mongo collection.
+//currently this is just the tokens joined together, 
 func genhash(in []string) string {
 	return strings.Join(in, " ")
 }
 
 
-// does an ngram exist
+// exists performs a query against mongo to detirmine if a specific ngram exists in the database or not.
+// this is part of an 'insert on duplicate key update' type situation
 func (n *nGram) exists() bool {
 	collection := getCollection()
 
@@ -40,7 +45,7 @@ func (n *nGram) exists() bool {
 	return true
 }
 
-
+// GetInstanceCount returns the number of times an ngram has been seen in a class
 func (n *nGram) GetInstanceCount(class string) int {
 	collection := getCollection()
 	var ngram nGram
@@ -51,9 +56,8 @@ func (n *nGram) GetInstanceCount(class string) int {
 	return ngram.Count[class]
 }
 
-
-func getTotalNGrams(class string) int {
-
+// getTotalNGrams returns the total number of times a specific ngram has been seen in a class across all documents
+func GetTotalNGrams(class string) int {
 	collection := getCollection()
 	var field = "count." + class
 	job := mgo.MapReduce{
@@ -72,6 +76,7 @@ func getTotalNGrams(class string) int {
 	return 0;
 }
 
+// CountDistinctNGrams returns the size of our vocabulary.  the number of distinct ngrams across all documents and classes
 func CountDistinctNGrams() int {
 	collection := getCollection()
 	count, err := collection.Find(bson.M{}).Count()
@@ -83,7 +88,7 @@ func CountDistinctNGrams() int {
 
 
 
-
+// Document holds the text that we are training with or classifying
 type Document struct {
 	filename string
 	tokens []string
@@ -94,12 +99,14 @@ type Document struct {
 
 }
 
+// NewDocument creates a new Document 
 func NewDocument() *Document {
 	d := &Document{}
 	d.class = &ClassData{}
 	return d
 }
 
+// TokenizeFile reads a file from disk and tokenizes it by splitting on spaces
 func (d *Document) TokenizeFile(fn string) {
 	d.filename = fn 
 	data, err := ioutil.ReadFile(fn)
@@ -109,6 +116,7 @@ func (d *Document) TokenizeFile(fn string) {
 	d.tokens = strings.Fields(string(data))
 }
 
+// GenerateNGrams organizes the already tokenized text into ngrams of a specified size and class
 func (d *Document) GenerateNGrams(n int, class string) {
 	d.class.Name = class
 	out := make([]nGram, 0)
@@ -130,6 +138,7 @@ func (d *Document) GenerateNGrams(n int, class string) {
 	}
 }
 
+// DumpToMongo commits the Document to mongo
 func (d *Document)DumpToMongo() {
 	collection := getCollection()	
 	field := "cound." + d.class.Name

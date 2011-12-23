@@ -53,7 +53,7 @@ func main() {
 		}
 
 		for class, v := range cb {
-			totalngrams := getTotalNGrams(class)
+			totalngrams := GetTotalNGrams(class)
 			probabilities := make([]float64, doc.totalNgrams)
 			idx := 0
 			for _, v := range doc.ngrams {
