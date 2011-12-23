@@ -3,10 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io/ioutil"
+	// "io/ioutil"
 	// "launchpad.net/gobson/bson"
 	"os"
-	"strings"
+	// "strings"
 )
 
 var train *bool 		= flag.Bool("train", true, "training mode")
@@ -30,12 +30,12 @@ func main() {
     	os.Exit(0)
     }
 
-	data, err := readFile(*filename)
-	if err != nil {
-		panic(err)
-	}
+    doc := NewDocument()
+    doc.TokenizeFile(*filename)
 
-	d1 := tokenize(string(data))
+    
+
+	d1 := doc.tokens
 	ngrams := AggregateNGrams(GenerateNGrams(d1, *nGramSize, *class), *class)
 
 	if *train {
@@ -77,17 +77,15 @@ func main() {
 }
 
 
-func readFile(str string) (string, os.Error) {
-	data, err := ioutil.ReadFile(str)
-	if err != nil {
-		return "", err
-	}
-	return string(data), nil
-}
+// func readFile(str string) (string, os.Error) {
+// 	data, err := ioutil.ReadFile(str)
+// 	if err != nil {
+// 		return "", err
+// 	}
+// 	return string(data), nil
+// }
 
-func tokenize(str string) []string {
-	return strings.Fields(str)
-}
+
 
 func laplaceSmoothing(n int, N int, classCount int) float64 {
 	return ( float64(n) + *laplaceConstant ) / ( float64(N) + float64(classCount) )

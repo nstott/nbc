@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"launchpad.net/gobson/bson"
 	"launchpad.net/mgo"
 	"math"
@@ -129,4 +130,24 @@ func totalProbability(probabilities []float64, classProbability float64) float64
 		ret += math.Log(v)
 	}	
 	return ret
+}
+
+
+
+type Document struct {
+	filename string
+	tokens []string
+}
+
+func NewDocument() *Document {
+	return &Document{}
+}
+
+func (d *Document) TokenizeFile(fn string) {
+	d.filename = fn 
+	data, err := ioutil.ReadFile(fn)
+	if err != nil {
+		panic(err)
+	}
+	d.tokens = strings.Fields(string(data))
 }
