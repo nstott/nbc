@@ -31,35 +31,27 @@ func main() {
     }
 
     doc := NewDocument()
-    doc.TokenizeFile(*filename)
-
-    
-
-	d1 := doc.tokens
-	ngrams := AggregateNGrams(GenerateNGrams(d1, *nGramSize, *class), *class)
+    doc.TokenizeFile(*filename)	
+	doc.GenerateNGrams(*nGramSize, *class)
 
 	if *train {
-
-		for _, v := range ngrams {
-			fmt.Printf("%d -> %s\n", v.Count[*class], v.Hash )
+		if *verbose { // dump out the ngrams we've discovered
+			for _, v := range doc.ngrams {
+				fmt.Printf("%d -> %s\n", v.Count[*class], v.Hash )
+			}
 		}
-		dumpNGramsToMongo(ngrams, *class)
-		updateClass(*class, 1)
-		counts, total := getClassTotals()
-		probabilities := classProbabilities(counts, total)
-		fmt.Printf("%v\n",probabilities)
+		doc.DumpToMongo()
 
 	} else {
 
-		classCount := getClassCount()
+		classCount := CountDistinctNGrams()
+		cb := GetClassProbabilities()
 
-		counts, total := getClassTotals()
-		cb := classProbabilities(counts, total)
 		for class, v := range cb {
 			totalngrams := getTotalNGrams(class)
-			probabilities := make([]float64, len(ngrams))
+			probabilities := make([]float64, doc.totalNgrams)
 			idx := 0
-			for _, v := range ngrams {
+			for _, v := range doc.ngrams {
 				instanceCount := getInstanceCount(v.Hash, class)
 				probabilities[idx] = laplaceSmoothing(instanceCount, totalngrams, classCount)
 
@@ -77,24 +69,7 @@ func main() {
 }
 
 
-// func readFile(str string) (string, os.Error) {
-// 	data, err := ioutil.ReadFile(str)
-// 	if err != nil {
-// 		return "", err
-// 	}
-// 	return string(data), nil
-// }
-
-
 
 func laplaceSmoothing(n int, N int, classCount int) float64 {
 	return ( float64(n) + *laplaceConstant ) / ( float64(N) + float64(classCount) )
 }
-
-
-
-
-
-
-
-

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	// "fmt"
 	"io/ioutil"
 	"launchpad.net/gobson/bson"
 	"launchpad.net/mgo"
@@ -25,63 +25,20 @@ func genhash(in []string) string {
 	return strings.Join(in, " ")
 }
 
-func GenerateNGrams(in []string, n int, class string) []nGram {
-	out := make([]nGram, 0)
-	for i := 0; i <= len(in) - n; i += 1 {
-		out = append(out, NewNGram(n, in[i:i+n], class))
-	}
-	return out
-}
-
-
-func AggregateNGrams(ngrams []nGram, class string) map[string]nGram {
-	ret := make(map[string]nGram)
-	var mng nGram // declare these here
-	var ok bool	 
-
-	for _, v := range ngrams {
-		mng, ok = ret[v.Hash]
-		if ok {
-			mng.Count[class]++
-		} else {
-			v.Count[class] = 1
-			ret[v.Hash] = v
-		}
-	}
-	return ret
-}
 
 // does an ngram exist
-func exists(ngram nGram) bool {
+func (n *nGram) exists() bool {
 	collection := getCollection()
 
-	if ngram.Hash == "" {
+	if n.Hash == "" {
 		panic("NGram has unitialized Hash") 
 	} 
 
-	c, err := collection.Find(bson.M{"hash": ngram.Hash}).Count()
+	c, err := collection.Find(bson.M{"hash": n.Hash}).Count()
 	if err != nil || c == 0 {
 		return false
 	}
 	return true
-}
-
-
-func dumpNGramsToMongo(ngrams map[string]nGram, class string) {
-	collection := getCollection()		
-	for _, ngram := range ngrams {
-		if exists(ngram) {
-			fmt.Println("This should be an upsert, but we're not that smart yet")
-			q := bson.M{"hash": ngram.Hash}
-			err := collection.Update(q, bson.M{"$inc": bson.M{"count."+class: 1}})
-			if err != nil {
-				fmt.Printf("err: %s\n", err)
-			}
-		} else {
-			// straight up insert
-			collection.Insert(ngram)
-		}
-	}
 }
 
 
@@ -105,7 +62,7 @@ func getTotalNGrams(class string) int {
 	return 0;
 }
 
-func getClassCount() int {
+func CountDistinctNGrams() int {
 	collection := getCollection()
 	count, err := collection.Find(bson.M{}).Count()
 	if err != nil {
@@ -137,10 +94,17 @@ func totalProbability(probabilities []float64, classProbability float64) float64
 type Document struct {
 	filename string
 	tokens []string
+	// ngrams []nGram
+	totalNgrams int
+	class *ClassData
+	ngrams map[string]nGram
+
 }
 
 func NewDocument() *Document {
-	return &Document{}
+	d := &Document{}
+	d.class = &ClassData{}
+	return d
 }
 
 func (d *Document) TokenizeFile(fn string) {
@@ -151,3 +115,44 @@ func (d *Document) TokenizeFile(fn string) {
 	}
 	d.tokens = strings.Fields(string(data))
 }
+
+func (d *Document) GenerateNGrams(n int, class string) {
+	d.class.Name = class
+	out := make([]nGram, 0)
+	for i := 0; i <= len(d.tokens) - n; i += 1 {
+		out = append(out, NewNGram(n, d.tokens[i:i+n], class))
+	}
+	d.totalNgrams = len(out)
+
+	d.ngrams = make(map[string]nGram)	 
+
+	for _, v := range out {
+		_, ok := d.ngrams[v.Hash]
+		if ok {
+			d.ngrams[v.Hash].Count[class]++
+		} else {
+			v.Count[class] = 1
+			d.ngrams[v.Hash] = v
+		}
+	}
+}
+
+func (d *Document)DumpToMongo() {
+	collection := getCollection()	
+	field := "cound." + d.class.Name
+		
+	for _, ngram := range d.ngrams {
+		if ngram.exists() {
+			q := bson.M{"hash": ngram.Hash}
+			err := collection.Update(q, bson.M{"$inc": bson.M{field: 1}})
+			if err != nil {
+				panic(err)
+			}
+		} else {
+			// straight up insert
+			collection.Insert(ngram)
+		}
+	}
+	d.class.Update()
+}
+

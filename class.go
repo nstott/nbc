@@ -1,26 +1,52 @@
 package main
 
 import (
-	"launchpad.net/gobson/bson")
+	"launchpad.net/gobson/bson"
+)
 
-type DataClass struct {
-	Class string
+
+
+type ClassData struct {
+	Name string
 	Count int
 }
 
-
-
-func updateClass(class string, count int) {
+func (c *ClassData) Update() {
 	collection := getClassCollection()
-	err := collection.Update(bson.M{"class": class}, bson.M{"$inc": bson.M{"count": 1}})
+	err := collection.Update(bson.M{"class": c.Name}, bson.M{"$inc": bson.M{"count": 1}})
 	if (err != nil) {
-		err = collection.Insert(&DataClass{class, 1})
+		err = collection.Insert(&ClassData{c.Name, 1})
 	}
 }
 
-func getClassTotals() (map[string]int, int) {
+// func GetClassTotals() (map[string]int, int) {
+// 	collection := getClassCollection()
+// 	var result ClassData
+
+// 	counts := make(map[string]int)
+// 	var total int
+
+// 	iter := collection.Find(bson.M{}).Limit(100).Iter()
+// 	for iter.Next(&result) {
+// 		total += result.Count
+// 		counts[result.Name] = result.Count
+//     }	
+
+//     return counts, total
+// }
+
+// func classProbabilities(counts map[string]int, total int) map[string]float64 {
+// 	var classCount = len(counts)
+// 	probabilities := make(map[string]float64)
+// 	for k, v := range counts {
+// 		probabilities[k] = laplaceSmoothing(v, total, classCount)
+// 	} 
+// 	return probabilities
+// }
+
+func GetClassProbabilities() map[string]float64 {
 	collection := getClassCollection()
-	var result DataClass
+	var result ClassData
 
 	counts := make(map[string]int)
 	var total int
@@ -28,15 +54,12 @@ func getClassTotals() (map[string]int, int) {
 	iter := collection.Find(bson.M{}).Limit(100).Iter()
 	for iter.Next(&result) {
 		total += result.Count
-		counts[result.Class] = result.Count
+		counts[result.Name] = result.Count
     }	
 
-    return counts, total
-}
-
-func classProbabilities(counts map[string]int, total int) map[string]float64 {
-	var classCount = len(counts)
+	classCount := len(counts)
 	probabilities := make(map[string]float64)
+
 	for k, v := range counts {
 		probabilities[k] = laplaceSmoothing(v, total, classCount)
 	} 

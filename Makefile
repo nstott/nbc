@@ -3,7 +3,7 @@ include $(GOROOT)/src/Make.inc
 TARG=nbc
 GOFILES=\
 	ngram.go\
-	mongongram.go\
+	mongo.go\
 	class.go\
 	nbc.go\
 
