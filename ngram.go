@@ -3,8 +3,8 @@ package main
 import (
 	// "fmt"
 	"io/ioutil"
-	"launchpad.net/gobson/bson"
 	"launchpad.net/mgo"
+	"launchpad.net/mgo/bson"
 	"strings"
 	)
 

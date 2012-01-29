@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"launchpad.net/gobson/bson"
+	"launchpad.net/mgo/bson"
 )
 
 

@@ -1,9 +1,8 @@
 package main
 
 import (
-	"launchpad.net/gobson/bson"
 	"launchpad.net/mgo"
-	"os"
+	"launchpad.net/mgo/bson"
 )
 
 const (
@@ -16,8 +15,8 @@ var session *mgo.Session
 
 // mongoConnect sets up a global *mgo.Session object, and ensures that the main collection is indexed
 func mongoConnect() *mgo.Session {
-	var err os.Error
-	session, err = mgo.Mongo(mongoHost)
+	var err error
+	session, err = mgo.Dial(mongoHost)
     if err != nil {
         panic(err)
     }
@@ -32,13 +31,13 @@ func mongoDisconnect() {
 }
 
 // getCollection returns the mongo collection that is used to store the ngram data
-func getCollection() mgo.Collection {
+func getCollection() *mgo.Collection {
 	return session.DB(mongoDB).C(*collection)	
 }
 
 //getClassCollection returns the mongo collection used to store information about 
 // the different classes that have been learned so far
-func getClassCollection() mgo.Collection {
+func getClassCollection() *mgo.Collection {
 	return session.DB(mongoDB).C(*collection + "_classes")
 }
 
