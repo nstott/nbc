@@ -5,8 +5,6 @@ import (
 	"launchpad.net/mgo/bson"
 )
 
-
-
 type ClassData struct {
 	Name string
 	Count int
