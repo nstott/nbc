@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"testing"
 )
 
@@ -21,6 +20,5 @@ func Test_genhash(t *testing.T) {
 		if out != v.want {
 			t.Errorf("genHash(%s) != %s, got %s instead", v.in, v.want, out)
 		}
-		log.Println(out)
 	}
 }

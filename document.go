@@ -33,6 +33,10 @@ func (d *Document) TokenizeFile(fn string) {
 	d.tokens = strings.Fields(string(data))
 }
 
+func (d *Document) TokenizeString(s string) {
+	d.tokens = strings.Fields(s)
+}
+
 // GenerateNGrams organizes the already tokenized text into ngrams of a specified size and class
 func (d *Document) GenerateNGrams(n int, class string) {
 	d.class.Name = class
