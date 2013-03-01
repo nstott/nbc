@@ -8,8 +8,10 @@ import (
 	"strings"
 	)
 
-// nGram is a collection of n tokens.  Count refers to the number of times this ngram has been seen in a specific document/class.  
-// ngrams are considered unique based upon their hash 
+/* nGram is a collection of n tokens.  Count refers to the 
+ * number of times this ngram has been seen in a specific document/class.  
+ * ngrams are considered unique based upon their hash
+ */  
 type nGram struct {
 	Length int
 	Tokens []string
@@ -22,15 +24,17 @@ func NewNGram(n int, tokens []string, class string) nGram  {
 	return nGram{n, tokens, genhash(tokens), map[string]int{class: 1}}
 }
 
-// genhash is a hashing function that returns a unique representation of the tokens.  the hash also serves as the primary key in the mongo collection.
-//currently this is just the tokens joined together, 
+/*
+ * genhash is a hashing function that returns a unique representation of the tokens.  the hash also serves as the primary key in the mongo collection.
+ * currently this is just the tokens joined together,
+ */ 
 func genhash(in []string) string {
 	return strings.Join(in, " ")
 }
 
-
-// exists performs a query against mongo to detirmine if a specific ngram exists in the database or not.
-// this is part of an 'insert on duplicate key update' type situation
+/* exists performs a query against mongo to detirmine if a specific ngram exists in the database or not.
+ * this is part of an 'insert on duplicate key update' type situation
+ */
 func (n *nGram) exists() bool {
 	collection := getCollection()
 
@@ -76,7 +80,10 @@ func GetTotalNGrams(class string) int {
 	return 0;
 }
 
-// CountDistinctNGrams returns the size of our vocabulary.  the number of distinct ngrams across all documents and classes
+/* 
+ * CountDistinctNGrams returns the size of our vocabulary.  
+ * i.e. the number of distinct ngrams across all documents and classes
+ */ 
 func CountDistinctNGrams() int {
 	collection := getCollection()
 	count, err := collection.Find(bson.M{}).Count()
@@ -85,8 +92,6 @@ func CountDistinctNGrams() int {
 	}
 	return count
 }
-
-
 
 // Document holds the text that we are training with or classifying
 type Document struct {
