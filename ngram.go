@@ -1,7 +1,6 @@
 package nbc
 
 import (
-	// "fmt"
 	"crypto/md5"
 	"fmt"
 	"io"
@@ -19,7 +18,6 @@ type nGram struct {
 	Count map[string]int
 }
 
-// NewNGram returns a new ngram
 func NewNGram(n int, tokens []string, class string) nGram  {
 	return nGram{n, tokens, genhash(tokens), map[string]int{class: 1}}
 }
@@ -33,11 +31,3 @@ func genhash(in []string) string {
 	io.WriteString(h, strings.Join(in, ""))
 	return fmt.Sprintf("%x", h.Sum([]byte{}))
 }
-
-
-
-
-
-
-
-

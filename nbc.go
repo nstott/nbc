@@ -54,9 +54,9 @@ func (classifier *Classifier) ClassifyFile(filename string, class Classification
 }
 
 func (classifier *Classifier) processFile(filename string,  class Classification) Document {
-	doc := NewDocument()
+	doc := NewDocument(class)
     doc.TokenizeFile(filename)	
-	doc.GenerateNGrams(classifier.nGramSize, class.Name)
+	doc.GenerateNGrams(classifier.nGramSize)
 	return doc
 }
 

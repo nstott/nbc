@@ -15,14 +15,12 @@ type Document struct {
 
 }
 
-// NewDocument creates a new Document 
-func NewDocument() Document {
+func NewDocument(class Classification) Document {
 	d := Document{}
-	d.class = &Classification{}
+	d.class = &class
 	return d
 }
 
-// TokenizeFile reads a file from disk and tokenizes it by splitting on spaces
 func (d *Document) TokenizeFile(fn string) {
 	d.filename = fn 
 	data, err := ioutil.ReadFile(fn)
@@ -37,11 +35,11 @@ func (d *Document) TokenizeString(s string) {
 }
 
 // GenerateNGrams organizes the already tokenized text into ngrams of a specified size and class
-func (d *Document) GenerateNGrams(n int, class string) {
-	d.class.Name = class
+func (d *Document) GenerateNGrams(n int) {
+
 	out := make([]nGram, 0)
 	for i := 0; i <= len(d.tokens) - n; i += 1 {
-		out = append(out, NewNGram(n, d.tokens[i:i+n], class))
+		out = append(out, NewNGram(n, d.tokens[i:i+n], d.class.Name))
 	}
 	d.totalNgrams = len(out)
 
@@ -50,9 +48,9 @@ func (d *Document) GenerateNGrams(n int, class string) {
 	for _, v := range out {
 		_, ok := d.ngrams[v.Hash]
 		if ok {
-			d.ngrams[v.Hash].Count[class]++
+			d.ngrams[v.Hash].Count[d.class.Name]++
 		} else {
-			v.Count[class] = 1
+			v.Count[d.class.Name] = 1
 			d.ngrams[v.Hash] = v
 		}
 	}
