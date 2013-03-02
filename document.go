@@ -10,15 +10,15 @@ type Document struct {
 	filename string
 	tokens []string
 	totalNgrams int
-	class *ClassData
+	class *Classification
 	ngrams map[string]nGram
 
 }
 
 // NewDocument creates a new Document 
-func NewDocument() *Document {
-	d := &Document{}
-	d.class = &ClassData{}
+func NewDocument() Document {
+	d := Document{}
+	d.class = &Classification{}
 	return d
 }
 

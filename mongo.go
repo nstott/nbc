@@ -81,11 +81,11 @@ func (m *MongoEngine) DumpDocument(d *Document) {
 		}
 	}
 
-	// update ClassData stats
+	// update Classification stats
 	fmt.Printf("class: %s\n", d.class.Name)
 	err := collection.Update(bson.M{"name": d.class.Name}, bson.M{"$inc": bson.M{"count": 1}})
 	if (err != nil) {
-		err = collection.Insert(&ClassData{d.class.Name, 1})
+		err = collection.Insert(&Classification{d.class.Name, 1})
 	}
 
 }
@@ -154,7 +154,7 @@ func (m *MongoEngine) GetTotalNGrams(class string) int {
 
 func (m *MongoEngine) GetClassProbabilities() map[string]float64 {
 	collection := m.getClassCollection()
-	var result ClassData
+	var result Classification
 
 	counts := make(map[string]int)
 	var total int

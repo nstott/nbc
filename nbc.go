@@ -26,22 +26,13 @@ type StorageEngine interface {
 	GetClassProbabilities() map[string]float64
 }
 
-
-
-
-func TrainFile(classifier Classifier, filename string, class ClassData) {
-    doc := NewDocument()
-    doc.TokenizeFile(filename)	
-	doc.GenerateNGrams(classifier.nGramSize, class.Name)	
-	classifier.engine.DumpDocument(doc)
+func (classifier *Classifier) TrainFile(filename string, class Classification) {
+    doc := classifier.processFile(filename, class)
+	classifier.engine.DumpDocument(&doc)
 }
 
-
-func ClassifyFile(classifier Classifier, filename string, class ClassData) {
-	doc := NewDocument()
-    doc.TokenizeFile(filename)	
-	doc.GenerateNGrams(classifier.nGramSize, class.Name)
-
+func (classifier *Classifier) ClassifyFile(filename string, class Classification) {
+	doc := classifier.processFile(filename, class)
 	classCount := classifier.engine.CountDistinctNGrams()
 	cb := classifier.engine.GetClassProbabilities()
 
@@ -60,6 +51,13 @@ func ClassifyFile(classifier Classifier, filename string, class ClassData) {
 		p := totalProbability(probabilities, v)
 		fmt.Printf("P(%s|Message) = %f\n", class, p)
 	}
+}
+
+func (classifier *Classifier) processFile(filename string,  class Classification) Document {
+	doc := NewDocument()
+    doc.TokenizeFile(filename)	
+	doc.GenerateNGrams(classifier.nGramSize, class.Name)
+	return doc
 }
 
 func totalProbability(probabilities []float64, classProbability float64) float64 {
