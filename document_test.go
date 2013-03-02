@@ -1,6 +1,7 @@
 package main
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -15,7 +16,7 @@ func Test_TokenizeFile(t *testing.T) {
 	for _, v := range d {
 		doc := NewDocument()
 		doc.TokenizeFile(v.in)
-		if !equalStringSlice(doc.tokens, v.want) {
+		if !reflect.DeepEqual(doc.tokens, v.want) {
 			t.Errorf("TokenizeFile(%s) != %v, got %v", v.in, v.want, doc.tokens)
 		}
 	}
@@ -32,7 +33,7 @@ func Test_TokenizeString(t *testing.T) {
 	for _, v := range d {
 		doc := NewDocument()
 		doc.TokenizeString(v.in)
-		if !equalStringSlice(doc.tokens, v.want) {
+		if !reflect.DeepEqual(doc.tokens, v.want) {
 			t.Errorf("TokenizeFile(%s) != %v, got %v", v.in, v.want, doc.tokens)
 		}
 	}
@@ -64,65 +65,8 @@ func Test_GenerateNGrams(t *testing.T) {
 		doc.TokenizeString(v.in)
 		doc.GenerateNGrams(num, class)
 
-		if !equalNgramMap(doc.ngrams, v.want) {
+		if !reflect.DeepEqual(doc.ngrams, v.want) {
 			t.Errorf("TokenizeFile(%s) \n\t%v, got \n\t%v", v.in, v.want, doc.ngrams)
 		}
 	}
 }
-
-
-// TODO use reflect.DeepEqual instead
-
-func equalStringSlice(a, b []string) bool {
-	if len(a) != len(b) {
-		return false
-	}
-
-	for i := range a {
-		if a[i] != b[i] {
-			return false
-		}
-	}
-	return true
-}
-
-func equalNgramMap(a, b map[string]nGram) bool {
-	if len(a) != len(b) {
-		return false
-	}
-	for k, v := range a {
-		if !v.equal(b[k]) {
-			return false
-		}
-	}
-	return true
-}
-
-func (a *nGram) equal(b nGram) bool {
-	if a.Length != b.Length || a.Hash != b.Hash || a.Length != b.Length {
-		return false
-	}
-
-	if len(a.Count) != len(b.Count) {
-		return false
-	}
-	for k, v := range a.Count {
-		if b.Count[k] != v {
-			return false
-		}
-	}
-
-	if len(a.Tokens) != len(b.Tokens) {
-		return false
-	}
-
-	for i := range a.Tokens {
-		if a.Tokens[i] != b.Tokens[i] {
-			return false
-		}
-	}
-
-	return true
-}
-
-
