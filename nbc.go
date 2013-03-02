@@ -1,75 +1,64 @@
-package main
+package nbc
 
 import (
-	"flag"
 	"fmt"
 	"math"
-	"os"
 )
 
-var train *bool 		= flag.Bool("train", true, "training mode")
-var class *string 		= flag.String("class", "true", "The class associated with this training set")
-var filename *string 	= flag.String("filename", "./nbc.go", "the filename to read from in training mode")
-var forget 				= flag.Bool("nuke", false, "forget the learned data")
-var collection 			= flag.String("collection", "data", "The db collection to use")
-var laplaceConstant 	= flag.Float64("k", 1, "The laplacian smoothing constant to use")
-var nGramSize			= flag.Int("n", 3, "The size of the ngrams")
-var verbose				= flag.Bool("v", false, "Be verbose")
+type Classifier struct {
+	engine StorageEngine
+	laPlaceConstant int
+	nGramSize int
+}
 
-func main() {
-	flag.Parse()
+func newClassifier(engine StorageEngine, laplaceConstant, nGramSize int) Classifier {
+	engine.Setup()
+	return Classifier{engine, laplaceConstant, nGramSize}
+}
 
-	mongoConnect()
-    defer mongoDisconnect()
+type StorageEngine interface {
+	Setup() 
+	TearDown()
+	DumpDocument(d *Document)
+	GetInstanceCount(n *nGram, class string) int
+	CountDistinctNGrams() int
+	GetTotalNGrams(class string) int
+	GetClassProbabilities() map[string]float64
+}
 
-    if *forget {
-    	fmt.Printf("Forgetting learned data in %s.%s\n",mongoDB,mongoCollection)
-    	forgetData()
-    	os.Exit(0)
-    }
 
+
+
+func TrainFile(classifier Classifier, filename string, class ClassData) {
     doc := NewDocument()
-    doc.TokenizeFile(*filename)	
-	doc.GenerateNGrams(*nGramSize, *class)
+    doc.TokenizeFile(filename)	
+	doc.GenerateNGrams(classifier.nGramSize, class.Name)	
+	classifier.engine.DumpDocument(doc)
+}
 
-	if *train {
 
-		if *verbose { // dump out the ngrams we've discovered
-			for _, v := range doc.ngrams {
-				fmt.Printf("%d -> %s\n", v.Count[*class], v.Hash )
-			}
+func ClassifyFile(classifier Classifier, filename string, class ClassData) {
+	doc := NewDocument()
+    doc.TokenizeFile(filename)	
+	doc.GenerateNGrams(classifier.nGramSize, class.Name)
+
+	classCount := classifier.engine.CountDistinctNGrams()
+	cb := classifier.engine.GetClassProbabilities()
+
+	for class, v := range cb {
+		totalngrams := classifier.engine.GetTotalNGrams(class)
+		probabilities := make([]float64, doc.totalNgrams)
+		idx := 0
+		for _, v := range doc.ngrams {
+			instanceCount := classifier.engine.GetInstanceCount(&v, class)
+			probabilities[idx] = laplaceSmoothing(instanceCount, totalngrams, classCount)
+
+			fmt.Printf("P(%s|%s) = (%d+1)/(%d+%d) = %f\n", 
+				class, v.Hash, instanceCount, totalngrams, classCount, probabilities[idx] )
+			idx += 1
 		}
-		doc.DumpToMongo()
-
-	} else {
-
-		classCount := CountDistinctNGrams()
-		cb := GetClassProbabilities()
-
-		if *verbose {
-			for k, v := range cb {
-				fmt.Printf("P(%s) = %f\n", k, v)
-			}
-		}
-
-		for class, v := range cb {
-			totalngrams := GetTotalNGrams(class)
-			probabilities := make([]float64, doc.totalNgrams)
-			idx := 0
-			for _, v := range doc.ngrams {
-				instanceCount := v.GetInstanceCount(class)
-				probabilities[idx] = laplaceSmoothing(instanceCount, totalngrams, classCount)
-
-				if *verbose {
-					fmt.Printf("P(%s|%s) = (%d+1)/(%d+%d) = %f\n", 
-						class, v.Hash, instanceCount, totalngrams, classCount, probabilities[idx] )
-				}
-				idx += 1
-			}
-			p := totalProbability(probabilities, v)
-			fmt.Printf("P(%s|Message) = %f\n", class, p)
-		}
-
+		p := totalProbability(probabilities, v)
+		fmt.Printf("P(%s|Message) = %f\n", class, p)
 	}
 }
 
@@ -81,6 +70,7 @@ func totalProbability(probabilities []float64, classProbability float64) float64
 	return ret
 }
 
-func laplaceSmoothing(n int, N int, classCount int) float64 {
-	return ( float64(n) + *laplaceConstant ) / ( float64(N) + float64(classCount) )
+func laplaceSmoothing(n, N int, classCount int) float64 {
+	K := 1.0
+	return ( float64(n) + K) / ( float64(N) + float64(classCount) )
 }

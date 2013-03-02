@@ -1,9 +1,8 @@
-package main
+package nbc
 
 import (
 	"strings"
 	"io/ioutil"
-	"launchpad.net/mgo/bson"
 )
 
 // Document holds the text that we are training with or classifying
@@ -57,24 +56,4 @@ func (d *Document) GenerateNGrams(n int, class string) {
 			d.ngrams[v.Hash] = v
 		}
 	}
-}
-
-// DumpToMongo commits the Document to mongo
-func (d *Document)DumpToMongo() {
-	collection := getCollection()	
-	field := "cound." + d.class.Name
-		
-	for _, ngram := range d.ngrams {
-		if ngram.exists() {
-			q := bson.M{"hash": ngram.Hash}
-			err := collection.Update(q, bson.M{"$inc": bson.M{field: 1}})
-			if err != nil {
-				panic(err)
-			}
-		} else {
-			// straight up insert
-			collection.Insert(ngram)
-		}
-	}
-	d.class.Update()
 }
