@@ -44,17 +44,17 @@ func Test_GenerateNGrams(t *testing.T) {
 
 	var d = []struct{
 		in string
-		want map[string]*nGram
+		want map[string]nGram
 	}{
-		{"play sports today", map[string]*nGram{
-			"8e332df73afd1944b529f1ee94eb0d7d": &nGram{Length: num, Tokens: []string{"play", "sports"}, Hash: "8e332df73afd1944b529f1ee94eb0d7d", Count: map[string]int{class: 1}},
-			"d3364f66e254f86cfef25c00cb30fe59": &nGram{Length: num, Tokens: []string{"sports", "today"}, Hash: "d3364f66e254f86cfef25c00cb30fe59", Count: map[string]int{class: 1}},
+		{"play sports today", map[string]nGram{
+			"8e332df73afd1944b529f1ee94eb0d7d": nGram{Length: num, Tokens: []string{"play", "sports"}, Hash: "8e332df73afd1944b529f1ee94eb0d7d", Count: map[string]int{class: 1}},
+			"d3364f66e254f86cfef25c00cb30fe59": nGram{Length: num, Tokens: []string{"sports", "today"}, Hash: "d3364f66e254f86cfef25c00cb30fe59", Count: map[string]int{class: 1}},
 			},
 		}, 
-		{"play play play sports today", map[string]*nGram{
-			"8e332df73afd1944b529f1ee94eb0d7d": &nGram{Length: num, Tokens: []string{"play", "sports"}, Hash: "8e332df73afd1944b529f1ee94eb0d7d", Count: map[string]int{class: 1}},
-			"d3364f66e254f86cfef25c00cb30fe59": &nGram{Length: num, Tokens: []string{"sports", "today"}, Hash: "d3364f66e254f86cfef25c00cb30fe59", Count: map[string]int{class: 1}},
-			"xxd3364f66e254f86cfef25c00cb30fe59": &nGram{Length: num, Tokens: []string{"play", "play"}, Hash: "d3364f66e254f86cfef25c00cb30fe59", Count: map[string]int{class: 2}},
+		{"play play play sports today", map[string]nGram{
+			"8e332df73afd1944b529f1ee94eb0d7d": nGram{Length: num, Tokens: []string{"play", "sports"}, Hash: "8e332df73afd1944b529f1ee94eb0d7d", Count: map[string]int{class: 1}},
+			"d3364f66e254f86cfef25c00cb30fe59": nGram{Length: num, Tokens: []string{"sports", "today"}, Hash: "d3364f66e254f86cfef25c00cb30fe59", Count: map[string]int{class: 1}},
+			"ec7841687efd9cf97ac07f0c80c48e8e": nGram{Length: num, Tokens: []string{"play", "play"}, Hash: "ec7841687efd9cf97ac07f0c80c48e8e", Count: map[string]int{class: 2}},
 			}, 
 		},
 	}
@@ -86,7 +86,7 @@ func equalStringSlice(a, b []string) bool {
 	return true
 }
 
-func equalNgramMap(a, b map[string]*nGram) bool {
+func equalNgramMap(a, b map[string]nGram) bool {
 	if len(a) != len(b) {
 		return false
 	}
