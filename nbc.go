@@ -20,7 +20,6 @@ type StorageEngine interface {
 	Setup() 
 	TearDown()
 	DumpDocument(d *Document)
-	GetInstanceCount(n *nGram, class string) int
 	CountDistinctNGrams() int
 	GetTotalNGrams(class string) int
 	GetClassProbabilities() map[string]float64
@@ -40,12 +39,11 @@ func (classifier *Classifier) ClassifyFile(filename string, class Classification
 		totalngrams := classifier.engine.GetTotalNGrams(class)
 		probabilities := make([]float64, doc.totalNgrams)
 		idx := 0
-		for _, v := range doc.ngrams {
-			instanceCount := classifier.engine.GetInstanceCount(&v, class)
-			probabilities[idx] = laplaceSmoothing(instanceCount, totalngrams, classCount)
+		for _, v := range doc.class.ngrams { 
+			probabilities[idx] = laplaceSmoothing(v.Count, totalngrams, classCount)
 
 			fmt.Printf("P(%s|%s) = (%d+1)/(%d+%d) = %f\n", 
-				class, v.Hash, instanceCount, totalngrams, classCount, probabilities[idx] )
+				class, v.Hash, v.Count, totalngrams, classCount, probabilities[idx] )
 			idx += 1
 		}
 		p := totalProbability(probabilities, v)

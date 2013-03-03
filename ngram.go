@@ -12,18 +12,18 @@ import (
  * ngrams are considered unique based upon their hash
  */  
 type nGram struct {
-	Length int
 	Tokens []string
 	Hash string
-	Count map[string]int
+	Count int
 }
 
-func NewNGram(n int, tokens []string, class string) nGram  {
-	return nGram{n, tokens, genhash(tokens), map[string]int{class: 1}}
+func NewNGram(tokens []string) *nGram  {
+	return &nGram{tokens, genhash(tokens), 1}
 }
 
 /*
- * genhash is a hashing function that returns a unique representation of the tokens.  the hash also serves as the primary key in the mongo collection.
+ * genhash is a hashing function that returns a unique representation of the tokens.  
+ * The hash also serves as the primary key in the mongo collection.
  * currently this is just the tokens joined together,
  */ 
 func genhash(in []string) string {

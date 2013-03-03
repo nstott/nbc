@@ -11,13 +11,14 @@ type Document struct {
 	tokens []string
 	totalNgrams int
 	class *Classification
-	ngrams map[string]nGram
+	ngrams map[string]*nGram
 
 }
 
 func NewDocument(class Classification) Document {
 	d := Document{}
-	d.class = &class
+	c := NewClassification(class.Name)
+	d.class = &c
 	return d
 }
 
@@ -36,22 +37,17 @@ func (d *Document) TokenizeString(s string) {
 
 // GenerateNGrams organizes the already tokenized text into ngrams of a specified size and class
 func (d *Document) GenerateNGrams(n int) {
-
-	out := make([]nGram, 0)
+	out := make([]*nGram, 0)
 	for i := 0; i <= len(d.tokens) - n; i += 1 {
-		out = append(out, NewNGram(n, d.tokens[i:i+n], d.class.Name))
+		out = append(out, NewNGram(d.tokens[i:i+n]))
 	}
 	d.totalNgrams = len(out)
-
-	d.ngrams = make(map[string]nGram)	 
-
 	for _, v := range out {
-		_, ok := d.ngrams[v.Hash]
+		_, ok := d.class.ngrams[v.Hash]
 		if ok {
-			d.ngrams[v.Hash].Count[d.class.Name]++
+			d.class.ngrams[v.Hash].Count++
 		} else {
-			v.Count[d.class.Name] = 1
-			d.ngrams[v.Hash] = v
+			d.class.ngrams[v.Hash] = v
 		}
 	}
 }

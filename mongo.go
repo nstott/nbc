@@ -69,7 +69,7 @@ func (m *MongoEngine) DumpDocument(d *Document) {
 	field := "cound." + d.class.Name
 		
 	for _, ngram := range d.ngrams {
-		if m.nGramExists(&ngram) {
+		if m.nGramExists(ngram) {
 			q := bson.M{"hash": ngram.Hash}
 			err := collection.Update(q, bson.M{"$inc": bson.M{field: 1}})
 			if err != nil {
@@ -85,7 +85,7 @@ func (m *MongoEngine) DumpDocument(d *Document) {
 	fmt.Printf("class: %s\n", d.class.Name)
 	err := collection.Update(bson.M{"name": d.class.Name}, bson.M{"$inc": bson.M{"count": 1}})
 	if (err != nil) {
-		err = collection.Insert(&Classification{d.class.Name, 1})
+		err = collection.Insert(&Classification{d.class.Name, nil, 1})
 	}
 
 }
@@ -106,17 +106,6 @@ func (m *MongoEngine) nGramExists(n *nGram) bool {
 		return false
 	}
 	return true
-}
-
-// GetInstanceCount returns the number of times an ngram has been seen in a class
-func (m *MongoEngine) GetInstanceCount(n *nGram, class string) int {
-	collection := m.getCollection()
-	var ngram nGram
-	err := collection.Find(bson.M{"hash": n.Hash}).One(&ngram)
-	if err != nil {
-		return 0
-	}
-	return ngram.Count[class]
 }
 
 /* 
