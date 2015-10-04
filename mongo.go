@@ -1,13 +1,13 @@
 package main
 
 import (
-	"launchpad.net/mgo"
-	"launchpad.net/mgo/bson"
+	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
 const (
-	mongoHost = "localhost"
-	mongoDB = "nbc"
+	mongoHost       = "localhost"
+	mongoDB         = "nbc"
 	mongoCollection = "data"
 )
 
@@ -17,12 +17,12 @@ var session *mgo.Session
 func mongoConnect() *mgo.Session {
 	var err error
 	session, err = mgo.Dial(mongoHost)
-    if err != nil {
-        panic(err)
-    }
-    session.SetSafe(&mgo.Safe{})
-    indexCollection()
-    return session
+	if err != nil {
+		panic(err)
+	}
+	session.SetSafe(&mgo.Safe{})
+	indexCollection()
+	return session
 }
 
 // mongoDisconnect disconnects from the underlying data source
@@ -32,10 +32,10 @@ func mongoDisconnect() {
 
 // getCollection returns the mongo collection that is used to store the ngram data
 func getCollection() *mgo.Collection {
-	return session.DB(mongoDB).C(*collection)	
+	return session.DB(mongoDB).C(*collection)
 }
 
-//getClassCollection returns the mongo collection used to store information about 
+//getClassCollection returns the mongo collection used to store information about
 // the different classes that have been learned so far
 func getClassCollection() *mgo.Collection {
 	return session.DB(mongoDB).C(*collection + "_classes")
@@ -45,15 +45,14 @@ func getClassCollection() *mgo.Collection {
 func indexCollection() {
 	col := getCollection()
 	index := mgo.Index{
-		Key: []string{"hash"},
-		Unique: true,
-		DropDups: true,
+		Key:        []string{"hash"},
+		Unique:     true,
+		DropDups:   true,
 		Background: true,
-		Sparse: true,
+		Sparse:     true,
 	}
 	_ = col.EnsureIndex(index)
 }
-
 
 // forgetData clears the data out of the mongo collection
 func forgetData() {

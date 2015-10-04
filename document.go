@@ -1,22 +1,21 @@
 package main
 
 import (
-	"strings"
+	"gopkg.in/mgo.v2/bson"
 	"io/ioutil"
-	"launchpad.net/mgo/bson"
+	"strings"
 )
 
 // Document holds the text that we are training with or classifying
 type Document struct {
-	filename string
-	tokens []string
+	filename    string
+	tokens      []string
 	totalNgrams int
-	class *ClassData
-	ngrams map[string]nGram
-
+	class       *ClassData
+	ngrams      map[string]nGram
 }
 
-// NewDocument creates a new Document 
+// NewDocument creates a new Document
 func NewDocument() *Document {
 	d := &Document{}
 	d.class = &ClassData{}
@@ -25,7 +24,7 @@ func NewDocument() *Document {
 
 // TokenizeFile reads a file from disk and tokenizes it by splitting on spaces
 func (d *Document) TokenizeFile(fn string) {
-	d.filename = fn 
+	d.filename = fn
 	data, err := ioutil.ReadFile(fn)
 	if err != nil {
 		panic(err)
@@ -41,12 +40,12 @@ func (d *Document) TokenizeString(s string) {
 func (d *Document) GenerateNGrams(n int, class string) {
 	d.class.Name = class
 	out := make([]nGram, 0)
-	for i := 0; i <= len(d.tokens) - n; i += 1 {
+	for i := 0; i <= len(d.tokens)-n; i += 1 {
 		out = append(out, NewNGram(n, d.tokens[i:i+n], class))
 	}
 	d.totalNgrams = len(out)
 
-	d.ngrams = make(map[string]nGram)	 
+	d.ngrams = make(map[string]nGram)
 
 	for _, v := range out {
 		_, ok := d.ngrams[v.Hash]
@@ -60,10 +59,10 @@ func (d *Document) GenerateNGrams(n int, class string) {
 }
 
 // DumpToMongo commits the Document to mongo
-func (d *Document)DumpToMongo() {
-	collection := getCollection()	
+func (d *Document) DumpToMongo() {
+	collection := getCollection()
 	field := "cound." + d.class.Name
-		
+
 	for _, ngram := range d.ngrams {
 		if ngram.exists() {
 			q := bson.M{"hash": ngram.Hash}

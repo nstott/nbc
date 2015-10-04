@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"launchpad.net/mgo/bson"
+	"gopkg.in/mgo.v2/bson"
 )
 
 type ClassData struct {
-	Name string
+	Name  string
 	Count int
 }
 
@@ -14,7 +14,7 @@ func (c *ClassData) Update() {
 	collection := getClassCollection()
 	fmt.Printf("class: %s\n", c.Name)
 	err := collection.Update(bson.M{"name": c.Name}, bson.M{"$inc": bson.M{"count": 1}})
-	if (err != nil) {
+	if err != nil {
 		err = collection.Insert(&ClassData{c.Name, 1})
 	}
 }
@@ -30,13 +30,13 @@ func GetClassProbabilities() map[string]float64 {
 	for iter.Next(&result) {
 		total += result.Count
 		counts[result.Name] = result.Count
-    }	
+	}
 
 	classCount := len(counts)
 	probabilities := make(map[string]float64)
 
 	for k, v := range counts {
 		probabilities[k] = laplaceSmoothing(v, total, classCount)
-	} 
+	}
 	return probabilities
 }
