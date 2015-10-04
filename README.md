@@ -5,6 +5,6 @@ A naive bayes classifier.
 An implementation of http://en.wikipedia.org/wiki/Naive_Bayes_classifier written in go with various backends (mongo)
 
 ## Install
-	go get http://github.com/nstott/nbc
+	go get github.com/nstott/nbc
 
 
